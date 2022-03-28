@@ -32,3 +32,6 @@ clashWar.py
 
 clashLeague.py
 - STILL IN PROGRESS
+
+ENDNOTE:
+These scripts will all generate a .csv file. However, I still recommend opening a new excel sheet and importing the .csv data to enable you to sort by each column.
