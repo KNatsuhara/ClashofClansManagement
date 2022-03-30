@@ -1,6 +1,8 @@
 # ClashofClansManagement
 3 Python Scripts that will return member stats, war stats, and league stats of the current clan season
 
+REMEMBER: To use these scripts you will need to register an account on the clash of clans api website and give them your IP Address to generate your own API token to use these scripts.
+
 clashMembers.py
 - Make sure to change the filename and clan_tag at the beginning of the file
 - This will return each member's:
