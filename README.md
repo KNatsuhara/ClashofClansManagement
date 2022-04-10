@@ -23,18 +23,37 @@ clashWar.py
 - This script will auto generate a filename for you (Date, Clan, Opponent)
 - THIS WILL ONLY GRAB DATA FROM THE CURRENT/LAST WAR THE CLAN IS IN
 - This will return each member's:
--   Tag
--   Name
--   Map Position/Rank
--   Attack 1 Stars
--   Attack 1 Percent
--   Attack 2 Stars
--   Attack 2 Percent
--   Total Stars
--   Total Percent
+  - Tag
+  - Name
+  - Map Position/Rank
+  - Attack 1 Stars
+  - Attack 1 Destruction Percent
+  - Attack 2 Stars
+  - Attack 2 Destruction Percent
+  - Total Stars
+  - Total Destruction Percent
 
 clashLeague.py
-- STILL IN PROGRESS
+- Make sure to change the clan_tag and directory_name at the beginning of the file
+- The directory_name will be the name of the file you are saving each clan war you fought in the clan league
+- This will also return a final summary/report of each member who fought
+- THIS WILL ONLY GRAB DATA FROM THE CURRENT CLAN LEAGUE
+- Individual Clan League War report contains info about each member's:
+  - Tag
+  - Name
+  - Map Position/Rank
+  - Attack Stars
+  - Attack Destruction Percent
+  - If they attacked
+- Final/Summary Clan League Report contains info about each member's:
+  - Tag
+  - Name
+  - Map Position/Rank
+  - Total Stars
+  - Total Destruction Percent
+  - Average Stars per attack
+  - Average Destruction per attack
+
 
 ENDNOTE:
 These scripts will all generate a .csv file. However, I still recommend opening a new excel sheet and importing the .csv data to enable you to sort by each column.
