@@ -6,16 +6,16 @@ REMEMBER: To use these scripts you will need to register an account on the clash
 clashMembers.py
 - Make sure to change the filename and clan_tag at the beginning of the file
 - This will return each member's:
----Tag
----Name
----Role
----Townhall Level
----Trophy Count
----Best Trophy Count
----Total War Stars
----Troops Donated
----Troops Received
----Clan Games (YOU WILL HAVE TO INPUT MANUALLY)
+  -Tag
+  -Name
+  -Role
+  -Townhall Level
+  -Trophy Count
+  -Best Trophy Count
+  -Total War Stars
+  -Troops Donated
+  -Troops Received
+  -Clan Games (YOU WILL HAVE TO INPUT MANUALLY)
 
 clashWar.py
 - Make sure to change the clan_tag at the beginning of the file
