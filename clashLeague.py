@@ -1,13 +1,17 @@
+from asyncore import write
 from fileinput import filename
+from venv import create
 import requests
 import csv
 import os
+import pandas as pd
+import glob
 # --------------------- INPUT VARIABLES ----------------------- #
 
 # Clan Tag
 clan_tag = "2QJ8Q2LRU"
-# Name of folder you want to save the war files to... Ex: clanLeague1
 
+# Name of folder you want to save the war files to... Ex: clanLeague1
 directory_name = "clanLeague1"
 
 # ------------------------------------------------------------- #
@@ -18,9 +22,7 @@ headers = {
 }
 
 fields = ['Tag', 'Name', 'Map Position', 'Attack 1 Stars', 'Attack 1 Percent', 'ifAttacked']
-
-# Create directory
-os.mkdir(directory_name)
+finalFields = ['Tag', 'Name', 'Map Position', 'Total War Participated', 'Attacks Made', 'Total Stars', 'Total Destruction', 'Average Stars', 'Average Destruction']
 
 # Get clan league group json to retieve individual clan war groups
 def get_current_leaguegroup():
@@ -69,6 +71,11 @@ def check_relevant_clan_war_tag(warTagList):
     return relevant_clan_war_list
 
 def get_each_clan_war(clan_war_tag_list):
+    # Create directory
+    try:
+        os.mkdir(directory_name)
+    except:
+        print("Folder already exists\n")
     for clan_war_tag in clan_war_tag_list:
         print(clan_war_tag)
         war_json = get_current_clan_league_war(clan_war_tag)
@@ -94,7 +101,6 @@ def populateWarList(war_json):
     # Increment through each member in your clan
     for member in my_clan_name:
         count += 1
-        print(member["name"])
         warInfo = []
         # Tag
         warInfo.append(member["tag"])
@@ -139,7 +145,7 @@ def parseWarDate(war_date):
     return newDate
 
 def createCSV(filename, warList):
-    # writing to csv file 
+    # writing to csv file and saving it to the desired directory
     with open(os.path.join(directory_name,'') + filename, 'w', encoding='utf-8', newline='') as csvfile: 
         # creating a csv writer object 
         csvwriter = csv.writer(csvfile) 
@@ -150,9 +156,86 @@ def createCSV(filename, warList):
         # writing the data rows 
         csvwriter.writerows(warList)
 
+# File paths with glob
+path = directory_name + '/'
+all_files = glob.glob(path + "/*.csv")
+
+def readAllCSVs():
+    listOfFiles = [pd.read_csv(filename, index_col=None, header=0) for filename in all_files]
+    df = pd.concat(listOfFiles, axis=0, ignore_index=True)
+    headers = df.columns.values.tolist()
+    body = df.values.tolist()
+    return body
+
+# fields = ['Tag', 'Name', 'Map Position', 'Attack 1 Stars', 'Attack 1 Percent', 'ifAttacked']
+# Tag, [ Name, Map Position, Total Wars participated in, Total attacks made, total stars, total destruction percent, average stars, average destruction percent]
+# EX: #agkfs, koji, 7, 6, 16, 510, 16/6, 510/6
+def createClanLeagueDictionary(dataFrameList):
+    clanLeagueDict = {}
+    for row in dataFrameList:
+        memberList = []
+        if clanLeagueDict.__contains__(row[0]): # If member already exists in the dictionary
+            oldMemberList = clanLeagueDict[row[0]]
+            memberList.append(oldMemberList[0]) # Name
+            memberList.append(oldMemberList[1]) # Map position
+            memberList.append(oldMemberList[2] + 1) # total wars participated
+            if row[5] == True: # Checks attribute ifAttacked is True
+                memberList.append(oldMemberList[3] + 1) # Increment Total attacks made
+            else:
+                memberList.append(oldMemberList[3])
+            memberList.append(oldMemberList[4] + row[3]) # Increment Total Stars
+            memberList.append(oldMemberList[5] + row[4]) # Increment Total Destruction Percent
+            clanLeagueDict[row[0]] = memberList # Update existing member's stats
+        else: # Member doesn't exist yet in the dictionary
+            memberList.append(row[1]) # Name
+            memberList.append(row[2]) # Map Position
+            memberList.append(1) # Total Wars Participated In
+            if row[5] == True: # Checks attribute ifAttacked is True
+                memberList.append(1) # Total attacks made
+            else:
+                memberList.append(0)
+            memberList.append(row[3]) # Total stars
+            memberList.append(row[4]) # Total destruction percent
+            clanLeagueDict[row[0]] = memberList # Append list
+
+    for value in clanLeagueDict.values():
+        if (value[3] == 0):
+            value.append(0) # Average Stars per attack
+            value.append(0) # Average Destruction Percent per attack
+        else:
+            value.append(value[4] / value[3]) # Average stars per attack
+            value.append(value[5] / value[3]) # Average destruction percent per attack
+
+    return clanLeagueDict
+
+def createFinalCSV(clanLeagueList):
+    # writing to csv file and saving it to the desired directory
+    with open(directory_name + "Summary.csv", 'w', encoding='utf-8', newline='') as csvfile: 
+        # creating a csv writer object 
+        csvwriter = csv.writer(csvfile)
+        # writing the fields
+        csvwriter.writerow(finalFields)
+        # writing the data rows 
+        csvwriter.writerows(clanLeagueList)
+
+def convertDictToList(clanLeagueDict):
+    clanLeagueList = []
+    # create list row from clanLeagueDict
+    for key in clanLeagueDict.keys():
+        row = []
+        row.append(key)
+        for element in clanLeagueDict[key]:
+            row.append(element)
+        clanLeagueList.append(row)
+    return clanLeagueList
+
+
+
 leaguegroup_json = get_current_leaguegroup()
 warTagList = get_individual_clan_war_tags(leaguegroup_json)
-print(warTagList)
 relevant_clan_war_list = check_relevant_clan_war_tag(warTagList)
-print(relevant_clan_war_list)
 get_each_clan_war(relevant_clan_war_list)
+df = readAllCSVs()
+clanLeagueDict = createClanLeagueDictionary(df)
+clanLeagueList = convertDictToList(clanLeagueDict)
+createFinalCSV(clanLeagueList)
