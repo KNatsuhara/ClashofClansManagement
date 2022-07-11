@@ -9,6 +9,8 @@ import csv
 # Clan Tag
 clan_tag = "2QJ8Q2LRU"
 
+# 2QU0V8PP2
+
 # ------------------------------------------------------------- #
 
 headers = {
@@ -113,6 +115,7 @@ def createCSV(filename):
 
 war_json = get_current_war()
 filename = createFilename(war_json)
+print(filename)
 populateWarList(war_json)
 print(warList)
 createCSV(filename)

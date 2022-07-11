@@ -4,7 +4,7 @@ import csv
 
 # --------------------- INPUT VARIABLES ----------------------- #
 # Name of csv file
-filename = "fancyFriendsSeason1.csv"
+filename = "fancyFriendsSeason5.csv"
 
 # Clan Tag
 clan_tag = "2QJ8Q2LRU"
@@ -12,10 +12,12 @@ clan_tag = "2QJ8Q2LRU"
 # ------------------------------------------------------------- #
 
 headers = {
-    'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiIsImtpZCI6IjI4YTMxOGY3LTAwMDAtYTFlYi03ZmExLTJjNzQzM2M2Y2NhNSJ9.eyJpc3MiOiJzdXBlcmNlbGwiLCJhdWQiOiJzdXBlcmNlbGw6Z2FtZWFwaSIsImp0aSI6ImNjMTEyZWJjLTU3MjItNDJjNC1hNDYyLWJiNzJiZmFiN2IxMiIsImlhdCI6MTY0ODQxNjMzMSwic3ViIjoiZGV2ZWxvcGVyL2MxNGZmYTU1LWFkYWYtMjM5Mi1kNmJjLTM2ODE5ZTZlNDk0MiIsInNjb3BlcyI6WyJjbGFzaCJdLCJsaW1pdHMiOlt7InRpZXIiOiJkZXZlbG9wZXIvc2lsdmVyIiwidHlwZSI6InRocm90dGxpbmcifSx7ImNpZHJzIjpbIjY5LjE2Ni40Ny4xNDUiXSwidHlwZSI6ImNsaWVudCJ9XX0.XbkvYNocQ71zGcCNkb42e6bdqk5zpu0o0ga8jfigUH6Qk_CLyO3762PcIrGCRwGvpVHO9Q2LIHOMCYlzPdUgDg'
+        'Authorization' : 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiIsImtpZCI6IjI4YTMxOGY3LTAwMDAtYTFlYi03ZmExLTJjNzQzM2M2Y2NhNSJ9.eyJpc3MiOiJzdXBlcmNlbGwiLCJhdWQiOiJzdXBlcmNlbGw6Z2FtZWFwaSIsImp0aSI6IjNiOGIyNzk3LWExZmEtNDg1Ny1hYTU4LWViNzllMzBmYjIwMiIsImlhdCI6MTY1NDk3NTQxMywic3ViIjoiZGV2ZWxvcGVyL2MxNGZmYTU1LWFkYWYtMjM5Mi1kNmJjLTM2ODE5ZTZlNDk0MiIsInNjb3BlcyI6WyJjbGFzaCJdLCJsaW1pdHMiOlt7InRpZXIiOiJkZXZlbG9wZXIvc2lsdmVyIiwidHlwZSI6InRocm90dGxpbmcifSx7ImNpZHJzIjpbIjY3LjE4NS43NS40MiJdLCJ0eXBlIjoiY2xpZW50In1dfQ.gKDKcV5HB3lR82BHB8DhGUgNCdObjEGxife2-_KVFF-OY2MRi5ngr2khXUfO14wFkMwDvfkTtjn_8Er0jQmANg'
+    # 'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiIsImtpZCI6IjI4YTMxOGY3LTAwMDAtYTFlYi03ZmExLTJjNzQzM2M2Y2NhNSJ9.eyJpc3MiOiJzdXBlcmNlbGwiLCJhdWQiOiJzdXBlcmNlbGw6Z2FtZWFwaSIsImp0aSI6ImNjMTEyZWJjLTU3MjItNDJjNC1hNDYyLWJiNzJiZmFiN2IxMiIsImlhdCI6MTY0ODQxNjMzMSwic3ViIjoiZGV2ZWxvcGVyL2MxNGZmYTU1LWFkYWYtMjM5Mi1kNmJjLTM2ODE5ZTZlNDk0MiIsInNjb3BlcyI6WyJjbGFzaCJdLCJsaW1pdHMiOlt7InRpZXIiOiJkZXZlbG9wZXIvc2lsdmVyIiwidHlwZSI6InRocm90dGxpbmcifSx7ImNpZHJzIjpbIjY5LjE2Ni40Ny4xNDUiXSwidHlwZSI6ImNsaWVudCJ9XX0.XbkvYNocQ71zGcCNkb42e6bdqk5zpu0o0ga8jfigUH6Qk_CLyO3762PcIrGCRwGvpVHO9Q2LIHOMCYlzPdUgDg'
+    # 'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiIsImtpZCI6IjI4YTMxOGY3LTAwMDAtYTFlYi03ZmExLTJjNzQzM2M2Y2NhNSJ9.eyJpc3MiOiJzdXBlcmNlbGwiLCJhdWQiOiJzdXBlcmNlbGw6Z2FtZWFwaSIsImp0aSI6IjIyYzFmZWM5LTA1NWQtNGViMy04ZjNhLWQ4NjQyMzFlNmZiNCIsImlhdCI6MTY0ODQ5MTYxOSwic3ViIjoiZGV2ZWxvcGVyL2MxNGZmYTU1LWFkYWYtMjM5Mi1kNmJjLTM2ODE5ZTZlNDk0MiIsInNjb3BlcyI6WyJjbGFzaCJdLCJsaW1pdHMiOlt7InRpZXIiOiJkZXZlbG9wZXIvc2lsdmVyIiwidHlwZSI6InRocm90dGxpbmcifSx7ImNpZHJzIjpbIjY5LjE2Ni40Ni4xNTMiXSwidHlwZSI6ImNsaWVudCJ9XX0.JcG65LcQ5fjREUPrHDv09Jox-MRGdcPn0mk5xD-XirwT31AuySxN6YIbCyohl_7aswIZfOkWu3P9lDRj3c6n8A'
 }
 
-fields = ['Tag', 'Name', 'Role', 'Townhall Level', 'Trophy Count', 'Best Trophy Count', 'War Stars', 'Troops Donated', 'Troops Received', 'Clan Game Points']
+fields = ['Tag', 'Name', 'Role', 'Townhall Level', 'Trophy Count', 'Best Trophy Count', 'War Stars', 'Troops Donated', 'Troops Received', 'Clan Game Points', 'Clan Capital Points']
 
 membersList = []
 
@@ -60,6 +62,11 @@ def populateMemberList(clan_json):
         memberInfo.append(member['donationsReceived'])
         #Clan Game Points
         memberInfo.append(0)
+        #Clan Capital Points
+        user_achievements = user_json['achievements']
+        for achievement in user_achievements:
+                if achievement['name'] == 'Most Valuable Clanmate':
+                    memberInfo.append(achievement['value'])
         # Append clan member information to total list
         membersList.append(memberInfo)
 
