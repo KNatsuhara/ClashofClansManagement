@@ -13,7 +13,7 @@ clan_tag = "2QU0V8PP2" # opponent clan tag that will retrieve data from their lo
 # ------------------------------------------------------------- #
 
 headers = {
-    'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiIsImtpZCI6IjI4YTMxOGY3LTAwMDAtYTFlYi03ZmExLTJjNzQzM2M2Y2NhNSJ9.eyJpc3MiOiJzdXBlcmNlbGwiLCJhdWQiOiJzdXBlcmNlbGw6Z2FtZWFwaSIsImp0aSI6ImNjMTEyZWJjLTU3MjItNDJjNC1hNDYyLWJiNzJiZmFiN2IxMiIsImlhdCI6MTY0ODQxNjMzMSwic3ViIjoiZGV2ZWxvcGVyL2MxNGZmYTU1LWFkYWYtMjM5Mi1kNmJjLTM2ODE5ZTZlNDk0MiIsInNjb3BlcyI6WyJjbGFzaCJdLCJsaW1pdHMiOlt7InRpZXIiOiJkZXZlbG9wZXIvc2lsdmVyIiwidHlwZSI6InRocm90dGxpbmcifSx7ImNpZHJzIjpbIjY5LjE2Ni40Ny4xNDUiXSwidHlwZSI6ImNsaWVudCJ9XX0.XbkvYNocQ71zGcCNkb42e6bdqk5zpu0o0ga8jfigUH6Qk_CLyO3762PcIrGCRwGvpVHO9Q2LIHOMCYlzPdUgDg'
+    'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiIsImtpZCI6IjI4YTMxOGY3LTAwMDAtYTFlYi03ZmExLTJjNzQzM2M2Y2NhNSJ9.eyJpc3MiOiJzdXBlcmNlbGwiLCJhdWQiOiJzdXBlcmNlbGw6Z2FtZWFwaSIsImp0aSI6IjlmMzg5ZTk4LTg1M2EtNDExZS1hNTlhLTlmYTNlNTJhNjc1NSIsImlhdCI6MTY2MDQ5NTUyNCwic3ViIjoiZGV2ZWxvcGVyL2MxNGZmYTU1LWFkYWYtMjM5Mi1kNmJjLTM2ODE5ZTZlNDk0MiIsInNjb3BlcyI6WyJjbGFzaCJdLCJsaW1pdHMiOlt7InRpZXIiOiJkZXZlbG9wZXIvc2lsdmVyIiwidHlwZSI6InRocm90dGxpbmcifSx7ImNpZHJzIjpbIjcxLjE5Ny4yMzQuNDIiLCI2Ny4xODUuNzUuNDIiLCI2OS4xNjYuNDcuMTQ1IiwiNjkuMTY2LjQ2LjE1MyJdLCJ0eXBlIjoiY2xpZW50In1dfQ.15UzvGBTiZqXNu18PwQOGl54OT_ITE9cjAAFz4I4BatcmH-w7jw8BpYPBKGQuFcHOaTrsfCcesrehGU7f3BusQ'
 }
 
 fields = ['Tag', 'Name', 'Map Position', 'Attack 1 Stars', 'Attack 1 Percent', 'Attack 2 Stars', 'Attack 2 Percent', 'Total Stars', 'Total Percent']
