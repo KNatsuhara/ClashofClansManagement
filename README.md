@@ -1,5 +1,7 @@
 # ClashofClansManagement
-3 Python Scripts that will return member stats, war stats, and league stats of the current clan season
+Clash of Clans related Python Scripts that will return member stats, war stats, and league stats of the current clan season
+
+Planning on to create a clashWarPrediction.py script that will predict the outcome of a clan war.
 
 REMEMBER: To use these scripts you will need to register an account on the clash of clans api website and give them your IP Address to generate your own API token to use these scripts.
 
@@ -18,7 +20,7 @@ clashMembers.py
   - Clan Games (YOU WILL HAVE TO INPUT MANUALLY)
 
 
-clashWar.py
+clashWar.py AND clashWarOpponent.py
 - Make sure to change the clan_tag at the beginning of the file
 - This script will auto generate a filename for you (Date, Clan, Opponent)
 - THIS WILL ONLY GRAB DATA FROM THE CURRENT/LAST WAR THE CLAN IS IN
@@ -32,6 +34,10 @@ clashWar.py
   - Attack 2 Destruction Percent
   - Total Stars
   - Total Destruction Percent
+  
+clashWarOpponent.py
+- There was a time where the clan war data did not appear for my clan, but could be found using the opposing clan's tag instead.
+- This script outputs the exact same data as clashWar.py, but uses the opposing clan's tag to retrieve the data.
 
 clashLeague.py
 - Make sure to change the clan_tag and directory_name at the beginning of the file
